@@ -1,3 +1,5 @@
 {
-  "installCommand": "yarn install"
+  "installCommand": "corepack enable && yarn install",
+  "buildCommand": "yarn build",
+  "framework": "nextjs"
 }

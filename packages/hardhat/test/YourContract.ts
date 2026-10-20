@@ -15,17 +15,53 @@ async function deployFixture() {
 
 describe("YourContract", function () {
   describe("Deployment", function () {
-    it("Should have the right message on deploy", async function () {
-      const { yourContract } = await networkHelpers.loadFixture(deployFixture);
-      expect(await yourContract.greeting()).to.equal("Building Unstoppable Apps!!!");
+    it("Should set the deployer as the owner", async function () {
+      const { env, yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const deployer = env.namedAccounts.deployer;
+      expect(await yourContract.owner()).to.equal(deployer);
     });
 
-    it("Should allow setting a new message", async function () {
-      const { yourContract } = await networkHelpers.loadFixture(deployFixture);
-      const newGreeting = "Learn Scaffold-ETH 2! :)";
+    it("Should set the initial delegate to the owner", async function () {
+      const { env, yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const deployer = env.namedAccounts.deployer;
+      expect(await yourContract.delegate()).to.equal(deployer);
+    });
+  });
 
-      await yourContract.setGreeting(newGreeting);
-      expect(await yourContract.greeting()).to.equal(newGreeting);
+  describe("setDelegate", function () {
+    it("Should allow the owner to change the delegate", async function () {
+      const { yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const newDelegate = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+
+      await yourContract.setDelegate(newDelegate);
+      expect(await yourContract.delegate()).to.equal(newDelegate);
+    });
+
+    it("Should emit a DelegateChanged event", async function () {
+      const { env, yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const deployer = env.namedAccounts.deployer;
+      const newDelegate = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+
+      await expect(yourContract.setDelegate(newDelegate))
+        .to.emit(yourContract, "DelegateChanged")
+        .withArgs(deployer, newDelegate);
+    });
+
+    it("Should reject the zero address", async function () {
+      const { yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const zeroAddress = "0x0000000000000000000000000000000000000000";
+
+      await expect(yourContract.setDelegate(zeroAddress)).to.be.revertedWith("Delegate cannot be zero address");
+    });
+
+    it("Should reject calls from non-owner", async function () {
+      const { yourContract } = await networkHelpers.loadFixture(deployFixture);
+      const [, nonOwner] = await ethers.getSigners();
+      const newDelegate = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+
+      await expect(yourContract.connect(nonOwner).setDelegate(newDelegate)).to.be.revertedWith(
+        "Only the owner can change the delegate",
+      );
     });
   });
 });

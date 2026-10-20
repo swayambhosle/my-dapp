@@ -1,0 +1,166 @@
+{
+  "address": "0xe90a2bb9a8972f5db1c156df1b873ff705515fd4",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oldDelegate",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newDelegate",
+          "type": "address"
+        }
+      ],
+      "name": "DelegateChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "delegate",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newDelegate",
+          "type": "address"
+        }
+      ],
+      "name": "setDelegate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "contractName": "YourContract",
+  "sourceName": "contracts/YourContract.sol",
+  "bytecode": "0x6080604052348015600e575f5ffd5b506040516102f93803806102f9833981016040819052602b9160b1565b6001600160a01b03811660845760405162461bcd60e51b815260206004820152601c60248201527f4f776e65722063616e6e6f74206265207a65726f206164647265737300000000604482015260640160405180910390fd5b5f80546001600160a01b039092166001600160a01b031992831681179091556001805490921617905560dc565b5f6020828403121560c0575f5ffd5b81516001600160a01b038116811460d5575f5ffd5b9392505050565b610210806100e95f395ff3fe608060405234801561000f575f5ffd5b506004361061003f575f3560e01c80638da5cb5b14610043578063c89e436114610071578063ca5eb5e114610084575b5f5ffd5b5f54610055906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b600154610055906001600160a01b031681565b6100976100923660046101ad565b610099565b005b5f546001600160a01b031633146101065760405162461bcd60e51b815260206004820152602660248201527f4f6e6c7920746865206f776e65722063616e206368616e6765207468652064656044820152656c656761746560d01b60648201526084015b60405180910390fd5b6001600160a01b03811661015c5760405162461bcd60e51b815260206004820152601f60248201527f44656c65676174652063616e6e6f74206265207a65726f20616464726573730060448201526064016100fd565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f602082840312156101bd575f5ffd5b81356001600160a01b03811681146101d3575f5ffd5b939250505056fea2646970667358221220c139ecc71b9c9fa9ff7da183c4c116ea4ec8638c841496589eac17d7bbcb97e464736f6c634300081e0033",
+  "deployedBytecode": "0x608060405234801561000f575f5ffd5b506004361061003f575f3560e01c80638da5cb5b14610043578063c89e436114610071578063ca5eb5e114610084575b5f5ffd5b5f54610055906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b600154610055906001600160a01b031681565b6100976100923660046101ad565b610099565b005b5f546001600160a01b031633146101065760405162461bcd60e51b815260206004820152602660248201527f4f6e6c7920746865206f776e65722063616e206368616e6765207468652064656044820152656c656761746560d01b60648201526084015b60405180910390fd5b6001600160a01b03811661015c5760405162461bcd60e51b815260206004820152601f60248201527f44656c65676174652063616e6e6f74206265207a65726f20616464726573730060448201526064016100fd565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f602082840312156101bd575f5ffd5b81356001600160a01b03811681146101d3575f5ffd5b939250505056fea2646970667358221220c139ecc71b9c9fa9ff7da183c4c116ea4ec8638c841496589eac17d7bbcb97e464736f6c634300081e0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {},
+  "inputSourceName": "project/contracts/YourContract.sol",
+  "devdoc": {
+    "details": "The owner can assign a delegate address. Only the owner can change the delegate.",
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "params": {
+          "_owner": "The address that will own this contract."
+        }
+      },
+      "setDelegate(address)": {
+        "params": {
+          "_newDelegate": "The new delegate address. Cannot be the zero address."
+        }
+      }
+    },
+    "title": "YourContract",
+    "version": 1
+  },
+  "evm": {
+    "gasEstimates": {
+      "creation": {
+        "codeDepositCost": "105600",
+        "executionCost": "infinite",
+        "totalCost": "infinite"
+      },
+      "external": {
+        "delegate()": "2324",
+        "owner()": "2301",
+        "setDelegate(address)": "28266"
+      }
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldDelegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newDelegate\",\"type\":\"address\"}],\"name\":\"DelegateChanged\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"delegate\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newDelegate\",\"type\":\"address\"}],\"name\":\"setDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"The owner can assign a delegate address. Only the owner can change the delegate.\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"params\":{\"_owner\":\"The address that will own this contract.\"}},\"setDelegate(address)\":{\"params\":{\"_newDelegate\":\"The new delegate address. Cannot be the zero address.\"}}},\"title\":\"YourContract\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Sets the deployer as both owner and initial delegate.\"},\"setDelegate(address)\":{\"notice\":\"Updates the delegate address. Only the owner can call this.\"}},\"notice\":\"A simple delegate management contract for the Delegate dApp.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/YourContract.sol\":\"YourContract\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project/contracts/YourContract.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n/**\\n * @title YourContract\\n * @notice A simple delegate management contract for the Delegate dApp.\\n * @dev The owner can assign a delegate address. Only the owner can change the delegate.\\n */\\ncontract YourContract {\\n    address public owner;\\n    address public delegate;\\n\\n    event DelegateChanged(address indexed oldDelegate, address indexed newDelegate);\\n\\n    /**\\n     * @notice Sets the deployer as both owner and initial delegate.\\n     * @param _owner The address that will own this contract.\\n     */\\n    constructor(address _owner) {\\n        require(_owner != address(0), \\\"Owner cannot be zero address\\\");\\n        owner = _owner;\\n        delegate = _owner;\\n    }\\n\\n    /**\\n     * @notice Updates the delegate address. Only the owner can call this.\\n     * @param _newDelegate The new delegate address. Cannot be the zero address.\\n     */\\n    function setDelegate(address _newDelegate) public {\\n        require(msg.sender == owner, \\\"Only the owner can change the delegate\\\");\\n        require(_newDelegate != address(0), \\\"Delegate cannot be zero address\\\");\\n\\n        address oldDelegate = delegate;\\n        delegate = _newDelegate;\\n        emit DelegateChanged(oldDelegate, _newDelegate);\\n    }\\n}\\n\",\"keccak256\":\"0x4d503657ddc0d5c2dbf26affea97fd1fd9dd705c1e1ffab61585621ab1516a5e\",\"license\":\"MIT\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 4,
+        "contract": "project/contracts/YourContract.sol:YourContract",
+        "label": "owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 6,
+        "contract": "project/contracts/YourContract.sol:YourContract",
+        "label": "delegate",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      }
+    }
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": {
+        "notice": "Sets the deployer as both owner and initial delegate."
+      },
+      "setDelegate(address)": {
+        "notice": "Updates the delegate address. Only the owner can call this."
+      }
+    },
+    "notice": "A simple delegate management contract for the Delegate dApp.",
+    "version": 1
+  },
+  "argsData": "0x000000000000000000000000535708ca956ebac1fb4917f27e0c7f666e608956",
+  "transaction": {
+    "hash": "0xde1a552c044026554c4226f20850a1af6cfa4b6cdd608e0cea09e9975a35417f",
+    "nonce": "0x0",
+    "origin": "0x535708ca956ebac1fb4917f27e0c7f666e608956"
+  },
+  "receipt": {
+    "blockHash": "0x36c3a89ec9942998374c55f48cc2657eb148a732c640cf731ceef1ba4a7bc255",
+    "blockNumber": "0xb67104",
+    "transactionIndex": "0x6d"
+  }
+}

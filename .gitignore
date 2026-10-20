@@ -21,3 +21,21 @@ node_modules
 
 # cli
 dist
+
+# environment / secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# build outputs
+packages/nextjs/.next
+packages/nextjs/out
+packages/hardhat/artifacts
+packages/hardhat/cache
+packages/hardhat/typechain-types
+
+# Vercel
+.vercel

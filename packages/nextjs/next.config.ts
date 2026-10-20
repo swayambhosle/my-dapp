@@ -18,4 +18,4 @@ if (isIpfs) {
   };
 }
 
-module.exports = nextConfig;
+export default nextConfig;
