@@ -19,6 +19,13 @@ describe("YourContract", function () {
     expect((await yourContract.delegate()).toLowerCase()).to.equal(env.namedAccounts.deployer.toLowerCase());
   });
 
+  it("accepts a separate initial owner for deployment", async function () {
+    const [, intendedOwner] = await ethers.getSigners();
+    const contract = await ethers.deployContract("YourContract", [intendedOwner.address]);
+    expect(await contract.owner()).to.equal(intendedOwner.address);
+    expect(await contract.delegate()).to.equal(intendedOwner.address);
+  });
+
   describe("delegation", function () {
     it("allows only the owner to set a nonzero delegate", async function () {
       const { yourContract } = await networkHelpers.loadFixture(deployFixture);
