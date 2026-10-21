@@ -13,7 +13,7 @@ const deployerPrivateKey =
 // You can get your own at https://dashboard.alchemyapi.io
 const providerApiKey = process.env.ALCHEMY_API_KEY || "IZYEU2cWBgnFmgiTAgpWD";
 
-export const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
+export const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "";
 
 const deployTasks = [
   overrideTask("deploy")

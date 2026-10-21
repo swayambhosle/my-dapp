@@ -85,7 +85,7 @@ const deployedContracts = {
   },
   11155111: {
     YourContract: {
-      address: "0xe90a2bb9a8972f5db1c156df1b873ff705515fd4",
+      address: "0xc7177d9a85599888e13ae634d9bcc17223d13a66",
       abi: [
         {
           inputs: [
@@ -118,6 +118,118 @@ const deployedContracts = {
           type: "event",
         },
         {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "closer",
+              type: "address",
+            },
+          ],
+          name: "ProposalClosed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "proposer",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "string",
+              name: "title",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "string",
+              name: "description",
+              type: "string",
+            },
+          ],
+          name: "ProposalCreated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "voter",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "bool",
+              name: "support",
+              type: "bool",
+            },
+          ],
+          name: "VoteCast",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+          ],
+          name: "closeProposal",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "title",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "description",
+              type: "string",
+            },
+          ],
+          name: "createProposal",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "delegate",
           outputs: [
@@ -125,6 +237,74 @@ const deployedContracts = {
               internalType: "address",
               name: "",
               type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+          ],
+          name: "getProposal",
+          outputs: [
+            {
+              internalType: "string",
+              name: "title",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "description",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "createdAt",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "forVotes",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "againstVotes",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isOpen",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "voter",
+              type: "address",
+            },
+          ],
+          name: "hasVoted",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
             },
           ],
           stateMutability: "view",
@@ -144,10 +324,30 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "proposalCount",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "revokeDelegation",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
-              name: "_newDelegate",
+              name: "newDelegate",
               type: "address",
             },
           ],
@@ -156,9 +356,40 @@ const deployedContracts = {
           stateMutability: "nonpayable",
           type: "function",
         },
+        {
+          inputs: [],
+          name: "version",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "proposalId",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "support",
+              type: "bool",
+            },
+          ],
+          name: "vote",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 11956484,
+      deployedOnBlock: 11962419,
     },
   },
 } as const;
