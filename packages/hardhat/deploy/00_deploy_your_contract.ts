@@ -11,6 +11,9 @@ export default deployScript(
       throw new Error("DELEGATION_OWNER_ADDRESS must be a valid 20-byte EVM address");
     }
     const initialOwner = (configuredOwner ?? deployer) as `0x${string}`;
+    if (network.chain.id === 84532 && initialOwner.toLowerCase() !== deployer.toLowerCase()) {
+      throw new Error("Base Sepolia deployment signer must match DELEGATION_OWNER_ADDRESS");
+    }
 
     await deploy("YourContract", {
       account: deployer,
