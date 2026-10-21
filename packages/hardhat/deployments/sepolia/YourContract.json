@@ -1,5 +1,5 @@
 {
-  "address": "0xe90a2bb9a8972f5db1c156df1b873ff705515fd4",
+  "address": "0xc7177d9a85599888e13ae634d9bcc17223d13a66",
   "abi": [
     {
       "inputs": [
@@ -32,6 +32,118 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "closer",
+          "type": "address"
+        }
+      ],
+      "name": "ProposalClosed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "proposer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "name": "ProposalCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "support",
+          "type": "bool"
+        }
+      ],
+      "name": "VoteCast",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "closeProposal",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "name": "createProposal",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "delegate",
       "outputs": [
@@ -39,6 +151,74 @@
           "internalType": "address",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProposal",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "forVotes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "againstVotes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isOpen",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        }
+      ],
+      "name": "hasVoted",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -58,10 +238,30 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "proposalCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "revokeDelegation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_newDelegate",
+          "name": "newDelegate",
           "type": "address"
         }
       ],
@@ -69,49 +269,79 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "support",
+          "type": "bool"
+        }
+      ],
+      "name": "vote",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
   "contractName": "YourContract",
   "sourceName": "contracts/YourContract.sol",
-  "bytecode": "0x6080604052348015600e575f5ffd5b506040516102f93803806102f9833981016040819052602b9160b1565b6001600160a01b03811660845760405162461bcd60e51b815260206004820152601c60248201527f4f776e65722063616e6e6f74206265207a65726f206164647265737300000000604482015260640160405180910390fd5b5f80546001600160a01b039092166001600160a01b031992831681179091556001805490921617905560dc565b5f6020828403121560c0575f5ffd5b81516001600160a01b038116811460d5575f5ffd5b9392505050565b610210806100e95f395ff3fe608060405234801561000f575f5ffd5b506004361061003f575f3560e01c80638da5cb5b14610043578063c89e436114610071578063ca5eb5e114610084575b5f5ffd5b5f54610055906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b600154610055906001600160a01b031681565b6100976100923660046101ad565b610099565b005b5f546001600160a01b031633146101065760405162461bcd60e51b815260206004820152602660248201527f4f6e6c7920746865206f776e65722063616e206368616e6765207468652064656044820152656c656761746560d01b60648201526084015b60405180910390fd5b6001600160a01b03811661015c5760405162461bcd60e51b815260206004820152601f60248201527f44656c65676174652063616e6e6f74206265207a65726f20616464726573730060448201526064016100fd565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f602082840312156101bd575f5ffd5b81356001600160a01b03811681146101d3575f5ffd5b939250505056fea2646970667358221220c139ecc71b9c9fa9ff7da183c4c116ea4ec8638c841496589eac17d7bbcb97e464736f6c634300081e0033",
-  "deployedBytecode": "0x608060405234801561000f575f5ffd5b506004361061003f575f3560e01c80638da5cb5b14610043578063c89e436114610071578063ca5eb5e114610084575b5f5ffd5b5f54610055906001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b600154610055906001600160a01b031681565b6100976100923660046101ad565b610099565b005b5f546001600160a01b031633146101065760405162461bcd60e51b815260206004820152602660248201527f4f6e6c7920746865206f776e65722063616e206368616e6765207468652064656044820152656c656761746560d01b60648201526084015b60405180910390fd5b6001600160a01b03811661015c5760405162461bcd60e51b815260206004820152601f60248201527f44656c65676174652063616e6e6f74206265207a65726f20616464726573730060448201526064016100fd565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f602082840312156101bd575f5ffd5b81356001600160a01b03811681146101d3575f5ffd5b939250505056fea2646970667358221220c139ecc71b9c9fa9ff7da183c4c116ea4ec8638c841496589eac17d7bbcb97e464736f6c634300081e0033",
+  "bytecode": "0x6080604052348015600e575f5ffd5b50604051610eb4380380610eb4833981016040819052602b9160b1565b6001600160a01b03811660845760405162461bcd60e51b815260206004820152601c60248201527f4f776e65722063616e6e6f74206265207a65726f206164647265737300000000604482015260640160405180910390fd5b5f80546001600160a01b039092166001600160a01b031992831681179091556001805490921617905560dc565b5f6020828403121560c0575f5ffd5b81516001600160a01b038116811460d5575f5ffd5b9392505050565b610dcb806100e95f395ff3fe608060405234801561000f575f5ffd5b50600436106100a6575f3560e01c8063a4d318051161006e578063a4d318051461014f578063c7f758a814610157578063c89e43611461017c578063c9d27afe1461018f578063ca5eb5e1146101a2578063da35c664146101b5575f5ffd5b80630386a016146100aa57806343859632146100bf57806354fd4d501461010157806365e481e2146101125780638da5cb5b14610125575b5f5ffd5b6100bd6100b836600461096f565b6101be565b005b6100ec6100cd3660046109a1565b600460209081525f928352604080842090915290825290205460ff1681565b60405190151581526020015b60405180910390f35b60025b6040519081526020016100f8565b610104610120366004610a10565b6102ba565b5f54610137906001600160a01b031681565b6040516001600160a01b0390911681526020016100f8565b6100bd6104d3565b61016a61016536600461096f565b610507565b6040516100f896959493929190610aaa565b600154610137906001600160a01b031681565b6100bd61019d366004610af6565b61069a565b6100bd6101b0366004610b28565b610893565b61010460025481565b5f546001600160a01b031633146101f05760405162461bcd60e51b81526004016101e790610b48565b60405180910390fd5b5f8111801561020157506002548111155b61021d5760405162461bcd60e51b81526004016101e790610b8e565b5f818152600360205260409020600581015460ff1661027e5760405162461bcd60e51b815260206004820152601a60248201527f50726f706f73616c20697320616c726561647920636c6f73656400000000000060448201526064016101e7565b60058101805460ff19169055604051339083907f9f4919593d9037fda1c872a81da93898e49ce460fadf3cbf6e8ae5b64e80e3cc905f90a35050565b5f80546001600160a01b031633146102e45760405162461bcd60e51b81526004016101e790610b48565b836103295760405162461bcd60e51b81526020600482015260156024820152745469746c652063616e6e6f7420626520656d70747960581b60448201526064016101e7565b816103765760405162461bcd60e51b815260206004820152601b60248201527f4465736372697074696f6e2063616e6e6f7420626520656d707479000000000060448201526064016101e7565b60025f815461038490610bc5565b91829055506040805160e06020601f8901819004028201810190925260c0810187815292935091829188908890819085018382808284375f92019190915250505090825250604080516020601f8701819004810282018101909252858152918101919086908690819084018382808284375f92018290525093855250504260208085019190915260408085018490526060850184905260016080909501949094528583526003905250208151819061043c9082610c81565b50602082015160018201906104519082610c81565b506040828101516002830155606083015160038301556080830151600483015560a0909201516005909101805460ff191691151591909117905551339082907fe1a39bb955c12c02b24074e4d2e09a80ed84a64ce9b4454b47456e8a26f96e75906104c3908990899089908990610d64565b60405180910390a3949350505050565b5f546001600160a01b031633146104fc5760405162461bcd60e51b81526004016101e790610b48565b6105055f61091e565b565b6060805f5f5f5f5f8711801561051f57506002548711155b61053b5760405162461bcd60e51b81526004016101e790610b8e565b5f8781526003602081905260409091206002810154918101546004820154600583015483549394859460018601949193919260ff1690869061057c90610bfd565b80601f01602080910402602001604051908101604052809291908181526020018280546105a890610bfd565b80156105f35780601f106105ca576101008083540402835291602001916105f3565b820191905f5260205f20905b8154815290600101906020018083116105d657829003601f168201915b5050505050955084805461060690610bfd565b80601f016020809104026020016040519081016040528092919081815260200182805461063290610bfd565b801561067d5780601f106106545761010080835404028352916020019161067d565b820191905f5260205f20905b81548152906001019060200180831161066057829003601f168201915b505050505094509650965096509650965096505091939550919395565b5f82815260036020526040902082158015906106b857506002548311155b6106d45760405162461bcd60e51b81526004016101e790610b8e565b600581015460ff1661071d5760405162461bcd60e51b8152602060048201526012602482015271141c9bdc1bdcd85b081a5cc818db1bdcd95960721b60448201526064016101e7565b6001546001600160a01b03161580159061074157506001546001600160a01b031633145b6107985760405162461bcd60e51b815260206004820152602260248201527f4f6e6c79207468652063757272656e742064656c65676174652063616e20766f604482015261746560f01b60648201526084016101e7565b5f83815260046020908152604080832033845290915290205460ff16156107fa5760405162461bcd60e51b815260206004820152601660248201527511195b1959d85d1948185b1c9958591e481d9bdd195960521b60448201526064016101e7565b5f8381526004602090815260408083203384529091529020805460ff19166001179055811561083e57600381018054905f61083483610bc5565b9190505550610855565b600481018054905f61084f83610bc5565b91905055505b6040518215158152339084907fe71fcdac32df1877c1700e7bda2a03157e20993363a28fc35ac495cefc76e4d49060200160405180910390a3505050565b5f546001600160a01b031633146108bc5760405162461bcd60e51b81526004016101e790610b48565b6001600160a01b0381166109125760405162461bcd60e51b815260206004820152601e60248201527f557365207265766f6b6544656c65676174696f6e20746f207265766f6b65000060448201526064016101e7565b61091b8161091e565b50565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f6020828403121561097f575f5ffd5b5035919050565b80356001600160a01b038116811461099c575f5ffd5b919050565b5f5f604083850312156109b2575f5ffd5b823591506109c260208401610986565b90509250929050565b5f5f83601f8401126109db575f5ffd5b50813567ffffffffffffffff8111156109f2575f5ffd5b602083019150836020828501011115610a09575f5ffd5b9250929050565b5f5f5f5f60408587031215610a23575f5ffd5b843567ffffffffffffffff811115610a39575f5ffd5b610a45878288016109cb565b909550935050602085013567ffffffffffffffff811115610a64575f5ffd5b610a70878288016109cb565b95989497509550505050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b60c081525f610abc60c0830189610a7c565b8281036020840152610ace8189610a7c565b91505085604083015284606083015283608083015282151560a0830152979650505050505050565b5f5f60408385031215610b07575f5ffd5b8235915060208301358015158114610b1d575f5ffd5b809150509250929050565b5f60208284031215610b38575f5ffd5b610b4182610986565b9392505050565b60208082526026908201527f4f6e6c7920746865206f776e65722063616e20706572666f726d20746869732060408201526530b1ba34b7b760d11b606082015260800190565b60208082526017908201527f50726f706f73616c20646f6573206e6f74206578697374000000000000000000604082015260600190565b5f60018201610be257634e487b7160e01b5f52601160045260245ffd5b5060010190565b634e487b7160e01b5f52604160045260245ffd5b600181811c90821680610c1157607f821691505b602082108103610c2f57634e487b7160e01b5f52602260045260245ffd5b50919050565b601f821115610c7c57805f5260205f20601f840160051c81016020851015610c5a5750805b601f840160051c820191505b81811015610c79575f8155600101610c66565b50505b505050565b815167ffffffffffffffff811115610c9b57610c9b610be9565b610caf81610ca98454610bfd565b84610c35565b6020601f821160018114610ce1575f8315610cca5750848201515b5f19600385901b1c1916600184901b178455610c79565b5f84815260208120601f198516915b82811015610d105787850151825560209485019460019092019101610cf0565b5084821015610d2d57868401515f19600387901b60f8161c191681555b50505050600190811b01905550565b81835281816020850137505f828201602090810191909152601f909101601f19169091010190565b604081525f610d77604083018688610d3c565b8281036020840152610d8a818587610d3c565b97965050505050505056fea264697066735822122064c78eac50ab11a69fb5ad61373fcbaa184d46e0586f5a3da6cdd1bee94620b464736f6c634300081e0033",
+  "deployedBytecode": "0x608060405234801561000f575f5ffd5b50600436106100a6575f3560e01c8063a4d318051161006e578063a4d318051461014f578063c7f758a814610157578063c89e43611461017c578063c9d27afe1461018f578063ca5eb5e1146101a2578063da35c664146101b5575f5ffd5b80630386a016146100aa57806343859632146100bf57806354fd4d501461010157806365e481e2146101125780638da5cb5b14610125575b5f5ffd5b6100bd6100b836600461096f565b6101be565b005b6100ec6100cd3660046109a1565b600460209081525f928352604080842090915290825290205460ff1681565b60405190151581526020015b60405180910390f35b60025b6040519081526020016100f8565b610104610120366004610a10565b6102ba565b5f54610137906001600160a01b031681565b6040516001600160a01b0390911681526020016100f8565b6100bd6104d3565b61016a61016536600461096f565b610507565b6040516100f896959493929190610aaa565b600154610137906001600160a01b031681565b6100bd61019d366004610af6565b61069a565b6100bd6101b0366004610b28565b610893565b61010460025481565b5f546001600160a01b031633146101f05760405162461bcd60e51b81526004016101e790610b48565b60405180910390fd5b5f8111801561020157506002548111155b61021d5760405162461bcd60e51b81526004016101e790610b8e565b5f818152600360205260409020600581015460ff1661027e5760405162461bcd60e51b815260206004820152601a60248201527f50726f706f73616c20697320616c726561647920636c6f73656400000000000060448201526064016101e7565b60058101805460ff19169055604051339083907f9f4919593d9037fda1c872a81da93898e49ce460fadf3cbf6e8ae5b64e80e3cc905f90a35050565b5f80546001600160a01b031633146102e45760405162461bcd60e51b81526004016101e790610b48565b836103295760405162461bcd60e51b81526020600482015260156024820152745469746c652063616e6e6f7420626520656d70747960581b60448201526064016101e7565b816103765760405162461bcd60e51b815260206004820152601b60248201527f4465736372697074696f6e2063616e6e6f7420626520656d707479000000000060448201526064016101e7565b60025f815461038490610bc5565b91829055506040805160e06020601f8901819004028201810190925260c0810187815292935091829188908890819085018382808284375f92019190915250505090825250604080516020601f8701819004810282018101909252858152918101919086908690819084018382808284375f92018290525093855250504260208085019190915260408085018490526060850184905260016080909501949094528583526003905250208151819061043c9082610c81565b50602082015160018201906104519082610c81565b506040828101516002830155606083015160038301556080830151600483015560a0909201516005909101805460ff191691151591909117905551339082907fe1a39bb955c12c02b24074e4d2e09a80ed84a64ce9b4454b47456e8a26f96e75906104c3908990899089908990610d64565b60405180910390a3949350505050565b5f546001600160a01b031633146104fc5760405162461bcd60e51b81526004016101e790610b48565b6105055f61091e565b565b6060805f5f5f5f5f8711801561051f57506002548711155b61053b5760405162461bcd60e51b81526004016101e790610b8e565b5f8781526003602081905260409091206002810154918101546004820154600583015483549394859460018601949193919260ff1690869061057c90610bfd565b80601f01602080910402602001604051908101604052809291908181526020018280546105a890610bfd565b80156105f35780601f106105ca576101008083540402835291602001916105f3565b820191905f5260205f20905b8154815290600101906020018083116105d657829003601f168201915b5050505050955084805461060690610bfd565b80601f016020809104026020016040519081016040528092919081815260200182805461063290610bfd565b801561067d5780601f106106545761010080835404028352916020019161067d565b820191905f5260205f20905b81548152906001019060200180831161066057829003601f168201915b505050505094509650965096509650965096505091939550919395565b5f82815260036020526040902082158015906106b857506002548311155b6106d45760405162461bcd60e51b81526004016101e790610b8e565b600581015460ff1661071d5760405162461bcd60e51b8152602060048201526012602482015271141c9bdc1bdcd85b081a5cc818db1bdcd95960721b60448201526064016101e7565b6001546001600160a01b03161580159061074157506001546001600160a01b031633145b6107985760405162461bcd60e51b815260206004820152602260248201527f4f6e6c79207468652063757272656e742064656c65676174652063616e20766f604482015261746560f01b60648201526084016101e7565b5f83815260046020908152604080832033845290915290205460ff16156107fa5760405162461bcd60e51b815260206004820152601660248201527511195b1959d85d1948185b1c9958591e481d9bdd195960521b60448201526064016101e7565b5f8381526004602090815260408083203384529091529020805460ff19166001179055811561083e57600381018054905f61083483610bc5565b9190505550610855565b600481018054905f61084f83610bc5565b91905055505b6040518215158152339084907fe71fcdac32df1877c1700e7bda2a03157e20993363a28fc35ac495cefc76e4d49060200160405180910390a3505050565b5f546001600160a01b031633146108bc5760405162461bcd60e51b81526004016101e790610b48565b6001600160a01b0381166109125760405162461bcd60e51b815260206004820152601e60248201527f557365207265766f6b6544656c65676174696f6e20746f207265766f6b65000060448201526064016101e7565b61091b8161091e565b50565b600180546001600160a01b038381166001600160a01b0319831681179093556040519116919082907fef9fc1dee6010109e6e3b21e51d44028e246dbad8a5a71ea192a30b19e1f457f905f90a35050565b5f6020828403121561097f575f5ffd5b5035919050565b80356001600160a01b038116811461099c575f5ffd5b919050565b5f5f604083850312156109b2575f5ffd5b823591506109c260208401610986565b90509250929050565b5f5f83601f8401126109db575f5ffd5b50813567ffffffffffffffff8111156109f2575f5ffd5b602083019150836020828501011115610a09575f5ffd5b9250929050565b5f5f5f5f60408587031215610a23575f5ffd5b843567ffffffffffffffff811115610a39575f5ffd5b610a45878288016109cb565b909550935050602085013567ffffffffffffffff811115610a64575f5ffd5b610a70878288016109cb565b95989497509550505050565b5f81518084528060208401602086015e5f602082860101526020601f19601f83011685010191505092915050565b60c081525f610abc60c0830189610a7c565b8281036020840152610ace8189610a7c565b91505085604083015284606083015283608083015282151560a0830152979650505050505050565b5f5f60408385031215610b07575f5ffd5b8235915060208301358015158114610b1d575f5ffd5b809150509250929050565b5f60208284031215610b38575f5ffd5b610b4182610986565b9392505050565b60208082526026908201527f4f6e6c7920746865206f776e65722063616e20706572666f726d20746869732060408201526530b1ba34b7b760d11b606082015260800190565b60208082526017908201527f50726f706f73616c20646f6573206e6f74206578697374000000000000000000604082015260600190565b5f60018201610be257634e487b7160e01b5f52601160045260245ffd5b5060010190565b634e487b7160e01b5f52604160045260245ffd5b600181811c90821680610c1157607f821691505b602082108103610c2f57634e487b7160e01b5f52602260045260245ffd5b50919050565b601f821115610c7c57805f5260205f20601f840160051c81016020851015610c5a5750805b601f840160051c820191505b81811015610c79575f8155600101610c66565b50505b505050565b815167ffffffffffffffff811115610c9b57610c9b610be9565b610caf81610ca98454610bfd565b84610c35565b6020601f821160018114610ce1575f8315610cca5750848201515b5f19600385901b1c1916600184901b178455610c79565b5f84815260208120601f198516915b82811015610d105787850151825560209485019460019092019101610cf0565b5084821015610d2d57868401515f19600387901b60f8161c191681555b50505050600190811b01905550565b81835281816020850137505f828201602090810191909152601f909101601f19169091010190565b604081525f610d77604083018688610d3c565b8281036020840152610d8a818587610d3c565b97965050505050505056fea264697066735822122064c78eac50ab11a69fb5ad61373fcbaa184d46e0586f5a3da6cdd1bee94620b464736f6c634300081e0033",
   "linkReferences": {},
   "deployedLinkReferences": {},
   "immutableReferences": {},
   "inputSourceName": "project/contracts/YourContract.sol",
   "devdoc": {
-    "details": "The owner can assign a delegate address. Only the owner can change the delegate.",
     "kind": "dev",
-    "methods": {
-      "constructor": {
-        "params": {
-          "_owner": "The address that will own this contract."
-        }
-      },
-      "setDelegate(address)": {
-        "params": {
-          "_newDelegate": "The new delegate address. Cannot be the zero address."
-        }
-      }
-    },
-    "title": "YourContract",
+    "methods": {},
+    "title": "Delegation and voting for a single owner-authorized delegate. ",
     "version": 1
   },
   "evm": {
     "gasEstimates": {
       "creation": {
-        "codeDepositCost": "105600",
+        "codeDepositCost": "706200",
         "executionCost": "infinite",
         "totalCost": "infinite"
       },
       "external": {
-        "delegate()": "2324",
-        "owner()": "2301",
-        "setDelegate(address)": "28266"
+        "closeProposal(uint256)": "32468",
+        "createProposal(string,string)": "infinite",
+        "delegate()": "2380",
+        "getProposal(uint256)": "infinite",
+        "hasVoted(uint256,address)": "2637",
+        "owner()": "2424",
+        "proposalCount()": "2404",
+        "revokeDelegation()": "28113",
+        "setDelegate(address)": "28396",
+        "version()": "225",
+        "vote(uint256,bool)": "61765"
+      },
+      "internal": {
+        "_setDelegate(address)": "25823"
       }
     }
   },
-  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldDelegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newDelegate\",\"type\":\"address\"}],\"name\":\"DelegateChanged\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"delegate\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newDelegate\",\"type\":\"address\"}],\"name\":\"setDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"The owner can assign a delegate address. Only the owner can change the delegate.\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"params\":{\"_owner\":\"The address that will own this contract.\"}},\"setDelegate(address)\":{\"params\":{\"_newDelegate\":\"The new delegate address. Cannot be the zero address.\"}}},\"title\":\"YourContract\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Sets the deployer as both owner and initial delegate.\"},\"setDelegate(address)\":{\"notice\":\"Updates the delegate address. Only the owner can call this.\"}},\"notice\":\"A simple delegate management contract for the Delegate dApp.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/YourContract.sol\":\"YourContract\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project/contracts/YourContract.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n/**\\n * @title YourContract\\n * @notice A simple delegate management contract for the Delegate dApp.\\n * @dev The owner can assign a delegate address. Only the owner can change the delegate.\\n */\\ncontract YourContract {\\n    address public owner;\\n    address public delegate;\\n\\n    event DelegateChanged(address indexed oldDelegate, address indexed newDelegate);\\n\\n    /**\\n     * @notice Sets the deployer as both owner and initial delegate.\\n     * @param _owner The address that will own this contract.\\n     */\\n    constructor(address _owner) {\\n        require(_owner != address(0), \\\"Owner cannot be zero address\\\");\\n        owner = _owner;\\n        delegate = _owner;\\n    }\\n\\n    /**\\n     * @notice Updates the delegate address. Only the owner can call this.\\n     * @param _newDelegate The new delegate address. Cannot be the zero address.\\n     */\\n    function setDelegate(address _newDelegate) public {\\n        require(msg.sender == owner, \\\"Only the owner can change the delegate\\\");\\n        require(_newDelegate != address(0), \\\"Delegate cannot be zero address\\\");\\n\\n        address oldDelegate = delegate;\\n        delegate = _newDelegate;\\n        emit DelegateChanged(oldDelegate, _newDelegate);\\n    }\\n}\\n\",\"keccak256\":\"0x4d503657ddc0d5c2dbf26affea97fd1fd9dd705c1e1ffab61585621ab1516a5e\",\"license\":\"MIT\"}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldDelegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newDelegate\",\"type\":\"address\"}],\"name\":\"DelegateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"closer\",\"type\":\"address\"}],\"name\":\"ProposalClosed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"proposer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"name\":\"ProposalCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"support\",\"type\":\"bool\"}],\"name\":\"VoteCast\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"}],\"name\":\"closeProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"name\":\"createProposal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"delegate\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"}],\"name\":\"getProposal\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"forVotes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"againstVotes\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"}],\"name\":\"hasVoted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposalCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revokeDelegation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newDelegate\",\"type\":\"address\"}],\"name\":\"setDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"proposalId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"support\",\"type\":\"bool\"}],\"name\":\"vote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Delegation and voting for a single owner-authorized delegate. \",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project/contracts/YourContract.sol\":\"YourContract\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project/contracts/YourContract.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n/** @title Delegation and voting for a single owner-authorized delegate. */\\ncontract YourContract {\\n    address public owner;\\n    address public delegate;\\n\\n    struct Proposal {\\n        string title;\\n        string description;\\n        uint256 createdAt;\\n        uint256 forVotes;\\n        uint256 againstVotes;\\n        bool isOpen;\\n    }\\n\\n    uint256 public proposalCount;\\n    mapping(uint256 proposalId => Proposal proposal) private proposals;\\n    mapping(uint256 proposalId => mapping(address voter => bool)) public hasVoted;\\n\\n    event DelegateChanged(address indexed oldDelegate, address indexed newDelegate);\\n    event ProposalCreated(uint256 indexed proposalId, address indexed proposer, string title, string description);\\n    event VoteCast(uint256 indexed proposalId, address indexed voter, bool support);\\n    event ProposalClosed(uint256 indexed proposalId, address indexed closer);\\n\\n    modifier onlyOwner() {\\n        require(msg.sender == owner, \\\"Only the owner can perform this action\\\");\\n        _;\\n    }\\n\\n    constructor(address _owner) {\\n        require(_owner != address(0), \\\"Owner cannot be zero address\\\");\\n        owner = _owner;\\n        delegate = _owner;\\n    }\\n\\n    function setDelegate(address newDelegate) external onlyOwner {\\n        require(newDelegate != address(0), \\\"Use revokeDelegation to revoke\\\");\\n        _setDelegate(newDelegate);\\n    }\\n\\n    function revokeDelegation() external onlyOwner {\\n        _setDelegate(address(0));\\n    }\\n\\n    function _setDelegate(address newDelegate) private {\\n        address oldDelegate = delegate;\\n        delegate = newDelegate;\\n        emit DelegateChanged(oldDelegate, newDelegate);\\n    }\\n\\n    function createProposal(\\n        string calldata title,\\n        string calldata description\\n    ) external onlyOwner returns (uint256 proposalId) {\\n        require(bytes(title).length > 0, \\\"Title cannot be empty\\\");\\n        require(bytes(description).length > 0, \\\"Description cannot be empty\\\");\\n\\n        proposalId = ++proposalCount;\\n        proposals[proposalId] = Proposal({\\n            title: title,\\n            description: description,\\n            createdAt: block.timestamp,\\n            forVotes: 0,\\n            againstVotes: 0,\\n            isOpen: true\\n        });\\n        emit ProposalCreated(proposalId, msg.sender, title, description);\\n    }\\n\\n    function vote(uint256 proposalId, bool support) external {\\n        Proposal storage proposal = proposals[proposalId];\\n        require(proposalId > 0 && proposalId <= proposalCount, \\\"Proposal does not exist\\\");\\n        require(proposal.isOpen, \\\"Proposal is closed\\\");\\n        require(delegate != address(0) && msg.sender == delegate, \\\"Only the current delegate can vote\\\");\\n        require(!hasVoted[proposalId][msg.sender], \\\"Delegate already voted\\\");\\n\\n        hasVoted[proposalId][msg.sender] = true;\\n        if (support) proposal.forVotes++;\\n        else proposal.againstVotes++;\\n        emit VoteCast(proposalId, msg.sender, support);\\n    }\\n\\n    function closeProposal(uint256 proposalId) external onlyOwner {\\n        require(proposalId > 0 && proposalId <= proposalCount, \\\"Proposal does not exist\\\");\\n        Proposal storage proposal = proposals[proposalId];\\n        require(proposal.isOpen, \\\"Proposal is already closed\\\");\\n        proposal.isOpen = false;\\n        emit ProposalClosed(proposalId, msg.sender);\\n    }\\n\\n    function getProposal(\\n        uint256 proposalId\\n    )\\n        external\\n        view\\n        returns (\\n            string memory title,\\n            string memory description,\\n            uint256 createdAt,\\n            uint256 forVotes,\\n            uint256 againstVotes,\\n            bool isOpen\\n        )\\n    {\\n        require(proposalId > 0 && proposalId <= proposalCount, \\\"Proposal does not exist\\\");\\n        Proposal storage proposal = proposals[proposalId];\\n        return (\\n            proposal.title,\\n            proposal.description,\\n            proposal.createdAt,\\n            proposal.forVotes,\\n            proposal.againstVotes,\\n            proposal.isOpen\\n        );\\n    }\\n\\n    function version() external pure returns (uint256) {\\n        return 2;\\n    }\\n}\\n\",\"keccak256\":\"0xe7db6f2f6c624e85286a390d745077d298e84dcf84919a46e4dbbc46770c928c\",\"license\":\"MIT\"}},\"version\":1}",
   "storageLayout": {
     "storage": [
       {
@@ -129,6 +359,30 @@
         "offset": 0,
         "slot": "1",
         "type": "t_address"
+      },
+      {
+        "astId": 21,
+        "contract": "project/contracts/YourContract.sol:YourContract",
+        "label": "proposalCount",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 26,
+        "contract": "project/contracts/YourContract.sol:YourContract",
+        "label": "proposals",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_struct(Proposal)19_storage)"
+      },
+      {
+        "astId": 32,
+        "contract": "project/contracts/YourContract.sol:YourContract",
+        "label": "hasVoted",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_uint256,t_mapping(t_address,t_bool))"
       }
     ],
     "types": {
@@ -136,31 +390,115 @@
         "encoding": "inplace",
         "label": "address",
         "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_uint256,t_mapping(t_address,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(address => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_bool)"
+      },
+      "t_mapping(t_uint256,t_struct(Proposal)19_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct YourContract.Proposal)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Proposal)19_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Proposal)19_storage": {
+        "encoding": "inplace",
+        "label": "struct YourContract.Proposal",
+        "members": [
+          {
+            "astId": 8,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "title",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 10,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "description",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 12,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "createdAt",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 14,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "forVotes",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 16,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "againstVotes",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 18,
+            "contract": "project/contracts/YourContract.sol:YourContract",
+            "label": "isOpen",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "192"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
       }
     }
   },
   "userdoc": {
     "kind": "user",
-    "methods": {
-      "constructor": {
-        "notice": "Sets the deployer as both owner and initial delegate."
-      },
-      "setDelegate(address)": {
-        "notice": "Updates the delegate address. Only the owner can call this."
-      }
-    },
-    "notice": "A simple delegate management contract for the Delegate dApp.",
+    "methods": {},
     "version": 1
   },
   "argsData": "0x000000000000000000000000535708ca956ebac1fb4917f27e0c7f666e608956",
   "transaction": {
-    "hash": "0xde1a552c044026554c4226f20850a1af6cfa4b6cdd608e0cea09e9975a35417f",
-    "nonce": "0x0",
+    "hash": "0x7c65f6edd23488f55c19c8e69eb5f90910ea81e13a52a7b6363be09ce334399f",
+    "nonce": "0x1",
     "origin": "0x535708ca956ebac1fb4917f27e0c7f666e608956"
   },
   "receipt": {
-    "blockHash": "0x36c3a89ec9942998374c55f48cc2657eb148a732c640cf731ceef1ba4a7bc255",
-    "blockNumber": "0xb67104",
-    "transactionIndex": "0x6d"
-  }
+    "blockHash": "0x43094a6d214cca4fd3ec072e0200dcdcb822a45d1af24ffcffedf9e5c12e41f3",
+    "blockNumber": "0xb68833",
+    "transactionIndex": "0xa"
+  },
+  "numDeployments": 2
 }
